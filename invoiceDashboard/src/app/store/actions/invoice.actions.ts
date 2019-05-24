@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { Invoice } from './../models/invoice';
+import { Invoice } from '../../models/invoice';
 
 export const ADD_INVOICE       = '[Invoice] Add';
 export const REMOVE_INVOICE    = '[Invoice] Remove';

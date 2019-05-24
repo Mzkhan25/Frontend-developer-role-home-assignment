@@ -1,14 +1,14 @@
 import { Action } from '@ngrx/store';
-import { Invoice } from './../models/invoice';
+import { Invoice } from '../../models/invoice';
 import * as InvoiceActions from './../actions/invoice.actions';
-import { stat } from 'fs';
+
 
 
 const initialState: Invoice = {
-   id: 0,
+   id: 4,
    date: Date.now().toString(),
-   subject: '',
-   amount : 0
+   subject: 'muiz',
+   amount : 1
 };
 
 // Section 2
@@ -17,12 +17,14 @@ export function reducer(state: Invoice[] = [initialState], action: InvoiceAction
     // Section 3
     switch (action.type) {
         case InvoiceActions.ADD_INVOICE:
+            console.log(action);
             return [...state, action.payload];
         case InvoiceActions.REMOVE_INVOICE:
             return  state.splice(action.payload, 1);
             case InvoiceActions.REMOVE_INVOICE:
                 return  state.splice(action.payload, 1);
         default:
+            console.log(state);
             return state;
     }
 }
