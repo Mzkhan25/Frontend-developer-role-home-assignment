@@ -3,6 +3,7 @@ import { Invoice } from 'src/app/models/invoice';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,13 +15,13 @@ export class DashboardComponent implements OnInit {
   invoices: Observable<Invoice[]>;
   displayedColumns: string[] = ['date', 'title', 'amount', 'iban'];
   dataSource: any;
-  constructor(private store: Store<AppState>) {
+  constructor(private router: Router, private store: Store<AppState>) {
     this.invoices = store.select('invoice');
     this.dataSource = this.invoices;
   }
 
   addNew() {
-    console.log("asd");
+    this.router.navigate(['/add']);
   }
   // delTutorial(index) {
   //   this.store.dispatch(new TutorialActions.RemoveTutorial(index) )

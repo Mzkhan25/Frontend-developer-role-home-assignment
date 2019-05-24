@@ -1,13 +1,14 @@
 
-<div class="row">
-   
-    <div class="col s5 pull-s7"><span class="flow-text">
-      <button mat-stroked-button (click)= "addNew()"  class="mat-elevation-z6 "  color="primary">
-        Primary
-      </button>
-    </span>
-  </div>
-  </div>
+<mat-grid-list cols="3" rowHeight="100px">
+    <mat-grid-tile [colspan]="2">
+      Invoice Dashboar
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1">
+        <button mat-stroked-button (click)= "addNew()"  class="mat-elevation-z6 "  color="primary">
+            Save
+          </button>
+    </mat-grid-tile>
+  </mat-grid-list>
 <div class="col-md-12">
   <div >
       
