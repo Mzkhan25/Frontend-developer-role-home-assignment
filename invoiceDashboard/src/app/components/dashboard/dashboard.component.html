@@ -1,13 +1,33 @@
-<div class="right" *ngIf="invoices">
+<div class="col-md-12">
+  <div >
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <h3>Tutorials</h3>
-  <ul>
-    
-      <!-- <li (click)="delTutorial(i)" *ngFor="let tutorial of tutorials | async; let i = index"> -->
-        <li  *ngFor="let invoice of invoices | async; let i = index">
-    
-    {{invoice.subject}}
-    </li>
-  </ul>
+      
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date | date :'medium'}} </td>
+          </ng-container>
+        
 
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> title </th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+          </ng-container>
+        
+   
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+          </ng-container>
+        
+        
+          <ng-container matColumnDef="iban">
+            <th mat-header-cell *matHeaderCellDef> iban </th>
+            <td mat-cell *matCellDef="let element"> {{element.iban}} </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+  </div>
 </div>

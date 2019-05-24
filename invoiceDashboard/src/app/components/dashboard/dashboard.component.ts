@@ -12,10 +12,11 @@ import { AppState } from 'src/app/store/app.state';
 export class DashboardComponent implements OnInit {
 
   invoices: Observable<Invoice[]>;
-
-  // Section 2
+  displayedColumns: string[] = ['date', 'title', 'amount', 'iban'];
+  dataSource: any;
   constructor(private store: Store<AppState>) {
     this.invoices = store.select('invoice');
+    this.dataSource = this.invoices;
   }
 
   // delTutorial(index) {
