@@ -1,6 +1,6 @@
 export interface Invoice {
     id: number;
-    date: Date;
+    date: string;
     subject: string;
     amount: number;
 
