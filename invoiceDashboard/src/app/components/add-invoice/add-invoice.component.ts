@@ -14,13 +14,9 @@ export class AddInvoiceComponent implements OnInit {
 
   constructor(private store: Store<AppState>) {}
 
-  addTutorial(id, subject, amount) {
+  addTutorial(id, title, amount, iban) {
     const date = '';
-    console.log(id);
-    console.log(subject);
-    console.log(amount);
-
-    this.store.dispatch(new InvoiceActions.AddInvoice({id : id, subject:subject,amount: amount, date:date}) );
+    this.store.dispatch(new InvoiceActions.AddInvoice({id, title, amount, date, iban}) );
   }
 
   ngOnInit() {

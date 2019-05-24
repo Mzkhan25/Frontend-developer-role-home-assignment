@@ -7,8 +7,9 @@ import * as InvoiceActions from './../actions/invoice.actions';
 const initialState: Invoice = {
    id: 4,
    date: Date.now().toString(),
-   subject: 'muiz',
-   amount : 1
+   title: 'muiz',
+   amount : 1,
+   iban:''
 };
 
 // Section 2

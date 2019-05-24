@@ -1,7 +1,8 @@
 export interface Invoice {
     id: number;
     date: string;
-    subject: string;
+    title: string;
     amount: number;
+    iban: string;
 
 }
