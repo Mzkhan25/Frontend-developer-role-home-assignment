@@ -19,6 +19,9 @@ export class DashboardComponent implements OnInit {
     this.dataSource = this.invoices;
   }
 
+  addNew() {
+    console.log("asd");
+  }
   // delTutorial(index) {
   //   this.store.dispatch(new TutorialActions.RemoveTutorial(index) )
   // }
