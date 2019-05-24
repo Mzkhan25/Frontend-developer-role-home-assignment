@@ -20,8 +20,8 @@ export function reducer(state: Invoice[] = [initialState], action: InvoiceAction
             return [...state, action.payload];
         case InvoiceActions.REMOVE_INVOICE:
             return  state.splice(action.payload, 1);
-        case InvoiceActions.EDIT_INVOICE:
-            return  null;
+            case InvoiceActions.REMOVE_INVOICE:
+                return  state.splice(action.payload, 1);
         default:
             return state;
     }

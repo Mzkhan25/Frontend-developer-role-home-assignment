@@ -6,6 +6,7 @@ export const ADD_INVOICE       = '[Invoice] Add';
 export const REMOVE_INVOICE    = '[Invoice] Remove';
 export const EDIT_INVOICE    = '[Invoice] Edit';
 
+
 export class AddInvoice implements Action {
     readonly type = ADD_INVOICE;
 
