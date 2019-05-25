@@ -1,11 +1,32 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.animal">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-</div>
+ <mat-tab-group [selectedIndex]="selectedTab">
+  <mat-tab label="Invoice Information"> 
+    <div class="row">
+      
+      <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field>
+            <input matInput placeholder="Subject"  [(ngModel)]="title">
+          </mat-form-field>
+      </div>
+      <div class="row">
+          Retrieve amount from bank account <mat-slide-toggle  placeholder="Amount" (click)="changeTab()"></mat-slide-toggle>
+      </div>
+     <div class="row">
+        <mat-form-field>
+            <input matInput placeholder="Amount" type="number"  [(ngModel)]="amount" class="example-right-align">
+            <span matSuffix> Euro</span>
+          </mat-form-field>
+     </div>
+     <div>
+        <button mat-raised-button color="primary" (click)="addNewPayment(1,title,date,amount,'')">Done</button>
+     </div>
+          
+  </mat-tab>
+  <mat-tab label="Second"> Payments </mat-tab>
+  <mat-tab label="Third"> Content 3 </mat-tab>
+</mat-tab-group>
