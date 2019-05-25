@@ -5,11 +5,11 @@ import * as InvoiceActions from './../actions/invoice.actions';
 
 
 const initialState: Invoice = {
-   id: 4,
-   date: Date.now().toString(),
-   title: 'muiz',
-   amount : 1,
-   iban:''
+    id: 4,
+    date: Date.now().toString(),
+    title: 'muiz',
+    amount: 1,
+    iban: ''
 };
 
 // Section 2
@@ -21,9 +21,12 @@ export function reducer(state: Invoice[] = [initialState], action: InvoiceAction
             console.log(action);
             return [...state, action.payload];
         case InvoiceActions.REMOVE_INVOICE:
-            return  state.splice(action.payload, 1);
-            case InvoiceActions.REMOVE_INVOICE:
-                return  state.splice(action.payload, 1);
+            const removeFilter = state.filter(data => data.id !== action.id);
+            return removeFilter;
+        case InvoiceActions.EDIT_INVOICE:
+             let editFilter = state.find(data => data.id === action.id);
+             editFilter = action.payload;
+             return [...state, editFilter ];
         default:
             console.log(state);
             return state;

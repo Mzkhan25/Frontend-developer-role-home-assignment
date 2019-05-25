@@ -10,10 +10,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddInvoiceComponent } from './components/add-invoice/add-invoice.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-  
-  MatAutocompleteModule,
+    MatAutocompleteModule,
   MatBadgeModule,
   MatBottomSheetModule,
   MatButtonModule,
@@ -49,12 +48,14 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+import { InvoiceDialogComponent } from './components/invoice-dialog/invoice-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    AddInvoiceComponent
+    AddInvoiceComponent,
+    InvoiceDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +63,8 @@ import {
     StoreModule.forRoot({
       invoice: reducer
     }),
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
     MatBadgeModule,
@@ -100,6 +103,7 @@ import {
     MatTreeModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [InvoiceDialogComponent]
 })
 export class AppModule { }

@@ -1,11 +1,10 @@
-
 <mat-grid-list cols="3" rowHeight="100px">
     <mat-grid-tile [colspan]="2">
       Invoice Dashboar
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1">
-        <button mat-stroked-button (click)= "addNew()"  class="mat-elevation-z6 "  color="primary">
-            Save
+        <button mat-raised-button (click)="openDialog()">
+            Add new
           </button>
     </mat-grid-tile>
   </mat-grid-list>
