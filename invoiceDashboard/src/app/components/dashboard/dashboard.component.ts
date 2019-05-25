@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   dataSource: any;
   constructor(private router: Router, private store: Store<AppState>, public dialog: MatDialog) { }
   openDialog(): void {
-    const dialogRef = this.dialog.open(InvoiceDialogComponent);
+    const dialogRef = this.dialog.open(InvoiceDialogComponent, { width: '50%', height : '50%'});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

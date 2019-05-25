@@ -1,32 +1,83 @@
- <mat-tab-group [selectedIndex]="selectedTab">
-  <mat-tab label="Invoice Information"> 
+<mat-tab-group [selectedIndex]="selectedTab">
+  <mat-tab label="Invoice Information">
     <div class="row">
-      
+
       <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
     </div>
     <div class="row">
-        <mat-form-field>
-            <input matInput placeholder="Subject"  [(ngModel)]="title">
-          </mat-form-field>
-      </div>
-      <div class="row">
-          Retrieve amount from bank account <mat-slide-toggle  placeholder="Amount" (click)="changeTab()"></mat-slide-toggle>
-      </div>
-     <div class="row">
-        <mat-form-field>
-            <input matInput placeholder="Amount" type="number"  [(ngModel)]="amount" class="example-right-align">
-            <span matSuffix> Euro</span>
-          </mat-form-field>
-     </div>
-     <div>
-        <button mat-raised-button color="primary" (click)="addNewPayment(1,title,date,amount,'')">Done</button>
-     </div>
-          
+      <mat-form-field>
+        <input matInput placeholder="Subject" [(ngModel)]="title">
+      </mat-form-field>
+    </div>
+    <div class="row">
+      Retrieve amount from bank account <mat-slide-toggle placeholder="Amount" (click)="changeTab()"></mat-slide-toggle>
+    </div>
+    <div class="row">
+      <mat-form-field>
+        <input matInput placeholder="Amount" type="number" [(ngModel)]="amount" class="example-right-align">
+        <span matSuffix> Euro</span>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="addNewPayment(1,title,date,amount,'')">Done</button>
+    </div>
+
   </mat-tab>
-  <mat-tab label="Second"> Payments </mat-tab>
+  <mat-tab label="Payments">
+    <form>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="glyphicon glyphicon-search"></i>
+          </div>
+          <input type="text" class="example-full-width" name="searchString" placeholder="Search Iban"
+            [(ngModel)]="searchString" />
+        </div>
+      </div>
+    </form>
+
+    <!-- <table class="table">
+          <tr>
+            <th>Name</th>
+            <!-- <th>Calories</th>
+            <th class="text-right">Actions</th>
+          </tr>
+          <tr
+            *ngFor="let food of bankInformation | bankSearch : 'iban' : searchString; let i = index" >
+            <td class="text-left">
+              {{food.iban}}
+            </td>
+            
+          </tr>
+        </table> -->
+    <div>
+      Bank Transfers:
+      <div class="divs" *ngFor="let information of bankInformation | bankSearch : 'iban' : searchString; let i = index" (click)= "informationSelected(information)">
+        <mat-grid-list cols="3" rowHeight="50px">
+          
+            <mat-grid-tile [colspan]="1">
+                
+                <mat-radio-button value="information.selected"></mat-radio-button>
+              </mat-grid-tile>
+          <mat-grid-tile [colspan]="1">
+            {{information.iban}}
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1">
+            {{information.amount}} EUR
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+    <div>
+        <button mat-raised-button color="primary" (click)="addNewPaymentThroughBank(1,title,date)">Done</button>
+      </div>
+  </mat-tab>
+
+
+
   <mat-tab label="Third"> Content 3 </mat-tab>
 </mat-tab-group>

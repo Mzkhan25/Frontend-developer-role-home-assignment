@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule  } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -49,13 +49,15 @@ import {
   MatTreeModule,
 } from '@angular/material';
 import { InvoiceDialogComponent } from './components/invoice-dialog/invoice-dialog.component';
+import { BankSearchPipe } from './pipes/bank-search.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     AddInvoiceComponent,
-    InvoiceDialogComponent
+    InvoiceDialogComponent,
+    BankSearchPipe
   ],
   imports: [
     BrowserModule,
@@ -64,6 +66,7 @@ import { InvoiceDialogComponent } from './components/invoice-dialog/invoice-dial
       invoice: reducer
     }),
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
