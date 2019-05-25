@@ -18,7 +18,9 @@ export function reducer(state: Invoice[] = [initialState], action: InvoiceAction
     // Section 3
     switch (action.type) {
         case InvoiceActions.ADD_INVOICE:
-            console.log(action);
+            length = state.length;
+            action.payload.id = length + 1;
+            console.log(action.payload);
             return [...state, action.payload];
         case InvoiceActions.REMOVE_INVOICE:
             const removeFilter = state.filter(data => data.id !== action.id);
