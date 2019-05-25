@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import * as InvoiceActions from '../../store/actions/invoice.actions';
 import { Invoice } from 'src/app/models/invoice';
-import { BankService } from 'src/app/servcies/bank.service';
+import { BankService } from 'src/app/services/bank.service';
 import { BankInformation } from 'src/app/models/bank-information';
 import { Observable } from 'rxjs';
 export interface DialogData {
