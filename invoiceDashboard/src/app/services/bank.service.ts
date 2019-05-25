@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 })
 export class BankService {
 
-  itemUrl = 'https://raw.githubusercontent.com/Mzkhan25/General-Resources/master/Json%20Files/bankRecords.json';
+  private itemUrl = 'https://raw.githubusercontent.com/Mzkhan25/General-Resources/master/Json%20Files/bankRecords.json';
 
   constructor(private httpClient: HttpClient) {
   }
