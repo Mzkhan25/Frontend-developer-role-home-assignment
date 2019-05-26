@@ -14,16 +14,18 @@
       </mat-form-field>
     </div>
     <div class="row">
-      Retrieve amount from bank account <mat-slide-toggle placeholder="Amount" (click)="changeTab()"></mat-slide-toggle>
+      Retrieve amount from bank account <mat-slide-toggle  placeholder="Amount" (click)="changeTab()"></mat-slide-toggle>
     </div>
     <div class="row">
       <mat-form-field>
-        <input matInput placeholder="Amount" type="number" [(ngModel)]="amount" class="example-right-align">
+        <input [disabled]="bankPaymentCheck" matInput placeholder="Amount" type="number" [(ngModel)]="amount"
+          class="example-right-align">
         <span matSuffix> Euro</span>
       </mat-form-field>
     </div>
     <div>
-      <button mat-raised-button color="primary" (click)="addNewPayment(1,title,date,amount,'')">Done</button>
+      <button mat-raised-button color="primary" [disabled]="bankPaymentCheck"
+        (click)="addNewPayment(1,title,date,amount,'')">Done</button>
     </div>
 
   </mat-tab>
@@ -39,30 +41,16 @@
         </div>
       </div>
     </form>
-
-    <!-- <table class="table">
-          <tr>
-            <th>Name</th>
-            <!-- <th>Calories</th>
-            <th class="text-right">Actions</th>
-          </tr>
-          <tr
-            *ngFor="let food of bankInformation | bankSearch : 'iban' : searchString; let i = index" >
-            <td class="text-left">
-              {{food.iban}}
-            </td>
-            
-          </tr>
-        </table> -->
     <div>
       Bank Transfers:
-      <div class="divs" *ngFor="let information of bankInformation | bankSearch : 'iban' : searchString; let i = index" (click)= "informationSelected(information)">
+      <div class="divs" *ngFor="let information of bankInformation | bankSearch : 'iban' : searchString; let i = index"
+        (click)="informationSelected(information)">
         <mat-grid-list cols="3" rowHeight="50px">
-          
-            <mat-grid-tile [colspan]="1">
-                
-                <mat-radio-button value="information.selected"></mat-radio-button>
-              </mat-grid-tile>
+
+          <mat-grid-tile [colspan]="1">
+
+            <mat-radio-button value="information.selected"></mat-radio-button>
+          </mat-grid-tile>
           <mat-grid-tile [colspan]="1">
             {{information.iban}}
           </mat-grid-tile>
@@ -73,11 +61,7 @@
       </div>
     </div>
     <div>
-        <button mat-raised-button color="primary" (click)="addNewPaymentThroughBank(1,title,date)">Done</button>
-      </div>
+      <button mat-raised-button color="primary" (click)="addNewPaymentThroughBank(1,title,date)">Done</button>
+    </div>
   </mat-tab>
-
-
-
-  <mat-tab label="Third"> Content 3 </mat-tab>
 </mat-tab-group>

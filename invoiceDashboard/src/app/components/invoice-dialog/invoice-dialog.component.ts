@@ -23,11 +23,10 @@ export class InvoiceDialogComponent implements OnInit {
     private store: Store<AppState>,
     private bankService: BankService,
     private appStateService: AppstateService) {
-    console.log(this.data);
+    this.bankPaymentCheck = false;
     if (this.data !== null && this.data !== undefined && this.data !== -1) {
       this.getRentRecord();
     }
-
   }
   selectedTab = 0;
   date: any;
@@ -38,6 +37,7 @@ export class InvoiceDialogComponent implements OnInit {
   invoice: Invoice;
   bankInfo: BankInformation;
   invoiceId: number;
+  bankPaymentCheck: boolean;
 
   bankInformation: BankInformation[];
   bankInformation$: Observable<BankInformation[]>;
@@ -54,11 +54,15 @@ export class InvoiceDialogComponent implements OnInit {
       this.title = this.invoice.title;
       this.iban = this.invoice.iban;
       this.invoiceId = this.invoice.id;
+      if (this.iban) {
+        this.bankPaymentCheck = true;
+      }
     });
   }
 
   changeTab() {
     this.selectedTab = 1;
+    this.bankPaymentCheck = true;
   }
   addNewPayment(id, title, date, amount, iban) {
     this.store.dispatch(new InvoiceActions.AddInvoice({ id, title, amount, date, iban }));
@@ -78,7 +82,7 @@ export class InvoiceDialogComponent implements OnInit {
   informationSelected(value) {
     this.bankInfo = value;
   }
-  addNewPaymentThroughBank(id,  title, date) {
+  addNewPaymentThroughBank(id, title, date) {
 
     if (this.data === -1) {
       const amount = this.bankInfo.amount;
