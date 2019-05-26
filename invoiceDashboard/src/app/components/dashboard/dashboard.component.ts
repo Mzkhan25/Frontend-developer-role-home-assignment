@@ -1,14 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { Invoice } from "src/app/models/invoice";
+import { MatDialog } from "@angular/material";
 import { Observable } from "rxjs";
-import { Store } from "@ngrx/store";
-import { AppState } from "src/app/store/app.state";
-import { Router } from "@angular/router";
-import { InvoiceDialogComponent } from "../invoice-dialog/invoice-dialog.component";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import * as InvoiceActions from "../../store/actions/invoice.actions";
-import { JsonPipe } from "@angular/common";
+
+import { Invoice } from "src/app/models/invoice";
 import { AppstateService } from "src/app/services/appstate.service";
+import { InvoiceDialogComponent } from "../invoice-dialog/invoice-dialog.component";
 
 @Component({
   selector: "app-dashboard",
@@ -16,16 +12,20 @@ import { AppstateService } from "src/app/services/appstate.service";
   styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
-  constructor(
-    private store: Store<AppState>,
-    public dialog: MatDialog,
-    private appStateService: AppstateService
-  ) {}
-
+  
   invoices: Observable<Invoice[]>;
   displayedColumns: string[] = ["date", "title", "amount", "iban", "changes"];
   dataSource: any;
   invoice: Invoice;
+  
+  constructor(public dialog: MatDialog, private appStateService: AppstateService) { }
+
+  ngOnInit() {
+    this.appStateService.getStore().subscribe(data => {
+      this.dataSource = data;
+    });
+  }
+
   editInvoice(id: number): void {
     const dialogRef = this.dialog.open(InvoiceDialogComponent, {
       width: "50%",
@@ -33,10 +33,9 @@ export class DashboardComponent implements OnInit {
       data: id
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("The dialog was closed");
-    });
+    dialogRef.afterClosed().subscribe(() => {});
   }
+
   addNewInvoice(): void {
     const dialogRef = this.dialog.open(InvoiceDialogComponent, {
       width: "50%",
@@ -44,17 +43,10 @@ export class DashboardComponent implements OnInit {
       data: -1
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("The dialog was closed");
-    });
+    dialogRef.afterClosed().subscribe(() => {});
   }
-  ngOnInit() {
-    this.appStateService.getStore().subscribe(data => {
-      this.dataSource = data;
-    });
-  }
+
   deleteInvoice(id: number) {
-    console.log(id);
-    this.store.dispatch(new InvoiceActions.RemoveInvoice(id));
+    this.appStateService.deleteItem(id);
   }
 }

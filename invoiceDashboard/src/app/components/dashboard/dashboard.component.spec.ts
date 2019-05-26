@@ -1,12 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { StoreModule } from '@ngrx/store';
+import { MatGridListModule, MatTableModule, MatDialogModule } from '@angular/material';
+
 import { DashboardComponent } from './dashboard.component';
-import {MatGridListModule, MatTableModule} from '@angular/material';
-
-
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.state';
-import { reducer } from 'src/app/store/reducers/invoice.reducer';
+import { AppstateService } from 'src/app/services/appstate.service';
+import { StoreModule } from '@ngrx/store';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -14,12 +11,11 @@ describe('DashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent, Store ],
-      imports: [ MatGridListModule, MatTableModule, StoreModule.forRoot({
-        invoice: reducer
-      })]
+      declarations: [DashboardComponent],
+      imports: [MatGridListModule, MatTableModule, MatDialogModule, StoreModule.forRoot({})],
+      providers: [AppstateService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

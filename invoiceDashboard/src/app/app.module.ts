@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducers/invoice.reducer';
+import { InvoiceEffects } from './store/effects/invoice.effects';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {EffectsModule} from '@ngrx/effects';
 import {
     MatAutocompleteModule,
   MatBadgeModule,
@@ -100,7 +102,9 @@ import { BankSearchPipe } from './pipes/bank-search.pipe';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule
+    MatTreeModule,
+
+    EffectsModule.forRoot([InvoiceEffects])
   ],
   providers: [],
   bootstrap: [AppComponent],

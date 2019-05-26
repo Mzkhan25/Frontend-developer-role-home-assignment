@@ -3,14 +3,14 @@
     <div class="row">
 
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date">
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="invoice.date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
     <div class="row">
       <mat-form-field>
-        <input matInput placeholder="Subject" [(ngModel)]="title">
+        <input matInput placeholder="Subject" [(ngModel)]="invoice.title">
       </mat-form-field>
     </div>
     <div class="row">
@@ -18,14 +18,14 @@
     </div>
     <div class="row">
       <mat-form-field>
-        <input [disabled]="bankPaymentCheck" matInput placeholder="Amount" type="number" [(ngModel)]="amount"
+        <input [disabled]="bankPaymentCheck" matInput placeholder="Amount" type="number" [(ngModel)]="invoice.amount"
           class="example-right-align">
         <span matSuffix> Euro</span>
       </mat-form-field>
     </div>
     <div>
       <button mat-raised-button color="primary" [disabled]="bankPaymentCheck"
-        (click)="addNewPayment(1,title,date,amount,'')">Done</button>
+        (click)="addNewPayment()">Done</button>
     </div>
 
   </mat-tab>
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div>
-      <button mat-raised-button color="primary" (click)="addNewPaymentThroughBank(1,title,date)">Done</button>
+      <button mat-raised-button color="primary" (click)="addNewPaymentThroughBank()">Done</button>
     </div>
   </mat-tab>
 </mat-tab-group>
