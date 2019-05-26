@@ -20,15 +20,14 @@ export function reducer(state: Invoice[] = [initialState], action: InvoiceAction
         case InvoiceActions.ADD_INVOICE:
             length = state.length;
             action.payload.id = length + 1;
-            console.log(action.payload);
             return [...state, action.payload];
         case InvoiceActions.REMOVE_INVOICE:
             const removeFilter = state.filter(data => data.id !== action.id);
             return removeFilter;
         case InvoiceActions.EDIT_INVOICE:
-             let editFilter = state.find(data => data.id === action.id);
+             let editFilter = state.find(data => data.id === action.payload.id);
              editFilter = action.payload;
-             return [...state, editFilter ];
+             return [...state ];
         default:
             console.log(state);
             return state;

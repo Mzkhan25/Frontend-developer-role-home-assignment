@@ -9,10 +9,6 @@ import { BankService } from 'src/app/services/bank.service';
 import { BankInformation } from 'src/app/models/bank-information';
 import { Observable } from 'rxjs';
 import { AppstateService } from 'src/app/services/appstate.service';
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-invoice-dialog',
@@ -39,8 +35,9 @@ export class InvoiceDialogComponent implements OnInit {
   amount: number;
   iban: string;
   invoices: Observable<Invoice[]>;
-  invoice: Invoice ;
+  invoice: Invoice;
   bankInfo: BankInformation;
+  invoiceId: number;
 
   bankInformation: BankInformation[];
   bankInformation$: Observable<BankInformation[]>;
@@ -48,14 +45,18 @@ export class InvoiceDialogComponent implements OnInit {
     this.dialogRef.close();
   }
   getRentRecord() {
-      this.invoices = this.appStateService.getStore();
-      this.invoices.subscribe(data => {
-
-this.invoice =   data.find(rent => rent.id === this.data);
-console.log(this.invoice);
-      });
-   
+    this.invoices = this.appStateService.getStore();
+    this.invoices.subscribe(data => {
+      this.invoice = data.find(rent => rent.id === this.data);
+      console.log(this.invoice);
+      this.amount = this.invoice.amount;
+      this.date = this.invoice.date;
+      this.title = this.invoice.title;
+      this.iban = this.invoice.iban;
+      this.invoiceId = this.invoice.id;
+    });
   }
+
   changeTab() {
     this.selectedTab = 1;
   }
@@ -75,16 +76,23 @@ console.log(this.invoice);
   }
 
   informationSelected(value) {
-
-    console.log(value);
     this.bankInfo = value;
-    console.log(this.bankInfo);
   }
-  addNewPaymentThroughBank(id, title, date) {
+  addNewPaymentThroughBank(id,  title, date) {
 
-    const amount = this.bankInfo.amount;
-    const iban = this.bankInfo.iban;
-    this.store.dispatch(new InvoiceActions.AddInvoice({ id, title, amount, date, iban }));
+    if (this.data === -1) {
+      const amount = this.bankInfo.amount;
+      const iban = this.bankInfo.iban;
+      this.store.dispatch(new InvoiceActions.AddInvoice({ id, title, amount, date, iban }));
+    } else {
+      this.invoice.title = title;
+      this.invoice.date = date;
+      this.invoice.amount = this.bankInfo.amount;
+      this.invoice.iban = this.bankInfo.iban;
+      this.store.dispatch(new InvoiceActions.EditInvoice(this.invoice));
+    }
+
+
     this.dialogRef.close();
   }
 }
