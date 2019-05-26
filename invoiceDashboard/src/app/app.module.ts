@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducers/invoice.reducer';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AddInvoiceComponent } from './components/add-invoice/add-invoice.component';
-
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -55,7 +53,6 @@ import { BankSearchPipe } from './pipes/bank-search.pipe';
   declarations: [
     AppComponent,
     DashboardComponent,
-    AddInvoiceComponent,
     InvoiceDialogComponent,
     BankSearchPipe
   ],

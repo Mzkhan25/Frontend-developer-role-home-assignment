@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   invoices: Observable<Invoice[]>;
   displayedColumns: string[] = ['date', 'title', 'amount', 'iban', 'changes'];
   dataSource: any;
-  constructor(private router: Router, private store: Store<AppState>, public dialog: MatDialog) { }
+  constructor(private store: Store<AppState>, public dialog: MatDialog) { }
   openDialog(): void {
     const dialogRef = this.dialog.open(InvoiceDialogComponent, { width: '50%', height : '50%'});
 
@@ -28,10 +28,6 @@ export class DashboardComponent implements OnInit {
 
     });
   }
-  addNew() {
-    this.router.navigate(['/add']);
-  }
-
   ngOnInit() {
     this.invoices = this.store.select('invoice');
     this.dataSource = this.invoices;
