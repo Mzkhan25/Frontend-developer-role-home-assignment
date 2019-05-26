@@ -5,7 +5,7 @@ import * as InvoiceActions from './../actions/invoice.actions';
 
 
 const initialState: Invoice = {
-    id: 4,
+    id: 1,
     date: Date.now().toString(),
     title: 'muiz',
     amount: 1,

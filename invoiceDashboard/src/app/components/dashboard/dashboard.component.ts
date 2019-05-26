@@ -19,12 +19,22 @@ import { AppstateService } from 'src/app/services/appstate.service';
 export class DashboardComponent implements OnInit {
   constructor(private store: Store<AppState>, public dialog: MatDialog, private appStateService: AppstateService) { }
 
-  invoices: Invoice[];
+  invoices: Observable<Invoice[]>;
   displayedColumns: string[] = ['date', 'title', 'amount', 'iban', 'changes'];
   dataSource: any;
   invoice: Invoice;
-  openDialog(): void {
-    const dialogRef = this.dialog.open(InvoiceDialogComponent, { width: '50%', height: '50%' });
+  editInvoice(id: number): void {
+    const dialogRef = this.dialog.open(InvoiceDialogComponent, { width: '50%', height: '50%',
+    data: id });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+
+    });
+  }
+  addNewInvoice(): void {
+    const dialogRef = this.dialog.open(InvoiceDialogComponent, { width: '50%', height: '50%',
+    data: -1 });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
@@ -32,21 +42,12 @@ export class DashboardComponent implements OnInit {
     });
   }
   ngOnInit() {
-    // this.invoices = this.appStateService.getStore();
     this.appStateService.getStore().subscribe(data => {
-
-      this.invoices = data;
+      this.dataSource = data;
     });
-    this.dataSource = this.invoices;
   }
   deleteInvoice(id: number) {
     console.log(id);
     this.store.dispatch(new InvoiceActions.RemoveInvoice(id));
   }
-
-  editInvoice(id: number) {
-    console.log(id);
-    // this.store.dispatch(new InvoiceActions.RemoveInvoice(id) );
-  }
-
 }
