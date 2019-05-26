@@ -1,33 +1,21 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from "@angular/core";
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.state';
-import * as InvoiceActions from '../../store/actions/invoice.actions';
-import { Invoice } from 'src/app/models/invoice';
-import { BankService } from 'src/app/services/bank.service';
-import { BankInformation } from 'src/app/models/bank-information';
-import { Observable } from 'rxjs';
-import { AppstateService } from 'src/app/services/appstate.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/store/app.state";
+import * as InvoiceActions from "../../store/actions/invoice.actions";
+import { Invoice } from "src/app/models/invoice";
+import { BankService } from "src/app/services/bank.service";
+import { BankInformation } from "src/app/models/bank-information";
+import { Observable } from "rxjs";
+import { AppstateService } from "src/app/services/appstate.service";
 
 @Component({
-  selector: 'app-invoice-dialog',
-  templateUrl: './invoice-dialog.component.html',
-  styleUrls: ['./invoice-dialog.component.css']
+  selector: "app-invoice-dialog",
+  templateUrl: "./invoice-dialog.component.html",
+  styleUrls: ["./invoice-dialog.component.css"]
 })
-
 export class InvoiceDialogComponent implements OnInit {
-  constructor(
-    public dialogRef: MatDialogRef<InvoiceDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: number,
-    private store: Store<AppState>,
-    private bankService: BankService,
-    private appStateService: AppstateService) {
-    this.bankPaymentCheck = false;
-    if (this.data !== null && this.data !== undefined && this.data !== -1) {
-      this.getRentRecord();
-    }
-  }
   selectedTab = 0;
   date: any;
   title: string;
@@ -38,9 +26,22 @@ export class InvoiceDialogComponent implements OnInit {
   bankInfo: BankInformation;
   invoiceId: number;
   bankPaymentCheck: boolean;
-
   bankInformation: BankInformation[];
   bankInformation$: Observable<BankInformation[]>;
+
+  constructor(
+    public dialogRef: MatDialogRef<InvoiceDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: number,
+    private store: Store<AppState>,
+    private bankService: BankService,
+    private appStateService: AppstateService
+  ) {
+    this.bankPaymentCheck = false;
+    if (this.data !== null && this.data !== undefined && this.data !== -1) {
+      this.getRentRecord();
+    }
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -48,7 +49,6 @@ export class InvoiceDialogComponent implements OnInit {
     this.invoices = this.appStateService.getStore();
     this.invoices.subscribe(data => {
       this.invoice = data.find(rent => rent.id === this.data);
-      console.log(this.invoice);
       this.amount = this.invoice.amount;
       this.date = this.invoice.date;
       this.title = this.invoice.title;
@@ -65,7 +65,15 @@ export class InvoiceDialogComponent implements OnInit {
     this.bankPaymentCheck = true;
   }
   addNewPayment(id, title, date, amount, iban) {
-    this.store.dispatch(new InvoiceActions.AddInvoice({ id, title, amount, date, iban }));
+    this.store.dispatch(
+      new InvoiceActions.AddInvoice({
+        id,
+        title,
+        amount,
+        date,
+        iban
+      })
+    );
     this.dialogRef.close();
   }
   ngOnInit() {
@@ -76,18 +84,24 @@ export class InvoiceDialogComponent implements OnInit {
     this.bankService.getBankData().subscribe(data => {
       this.bankInformation = data;
     });
-
   }
 
   informationSelected(value) {
     this.bankInfo = value;
   }
   addNewPaymentThroughBank(id, title, date) {
-
     if (this.data === -1) {
       const amount = this.bankInfo.amount;
       const iban = this.bankInfo.iban;
-      this.store.dispatch(new InvoiceActions.AddInvoice({ id, title, amount, date, iban }));
+      this.store.dispatch(
+        new InvoiceActions.AddInvoice({
+          id,
+          title,
+          amount,
+          date,
+          iban
+        })
+      );
     } else {
       this.invoice.title = title;
       this.invoice.date = date;
@@ -95,7 +109,6 @@ export class InvoiceDialogComponent implements OnInit {
       this.invoice.iban = this.bankInfo.iban;
       this.store.dispatch(new InvoiceActions.EditInvoice(this.invoice));
     }
-
 
     this.dialogRef.close();
   }
