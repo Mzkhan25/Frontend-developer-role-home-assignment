@@ -1,35 +1,36 @@
-import { Component, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material";
-import { Observable } from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
 
-import { Invoice } from "src/app/models/invoice";
-import { AppstateService } from "src/app/services/appstate.service";
-import { InvoiceDialogComponent } from "../invoice-dialog/invoice-dialog.component";
+import { Invoice } from 'src/app/models/invoice';
+import { AppstateService } from 'src/app/services/appstate.service';
+import { InvoiceDialogComponent } from '../invoice-dialog/invoice-dialog.component';
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.css"]
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  
+
   invoices: Observable<Invoice[]>;
-  displayedColumns: string[] = ["date", "title", "amount", "iban", "changes"];
+  displayedColumns: string[] = ['date', 'title', 'amount', 'iban', 'changes'];
   dataSource: any;
   invoice: Invoice;
-  
+
   constructor(public dialog: MatDialog, private appStateService: AppstateService) { }
 
   ngOnInit() {
     this.appStateService.getStore().subscribe(data => {
       this.dataSource = data;
+      this.invoices = data;
     });
   }
 
   editInvoice(id: number): void {
     const dialogRef = this.dialog.open(InvoiceDialogComponent, {
-      width: "50%",
-      height: "50%",
+      width: '50%',
+      height: '50%',
       data: id
     });
 
@@ -38,8 +39,8 @@ export class DashboardComponent implements OnInit {
 
   addNewInvoice(): void {
     const dialogRef = this.dialog.open(InvoiceDialogComponent, {
-      width: "50%",
-      height: "50%",
+      width: '50%',
+      height: '50%',
       data: -1
     });
 

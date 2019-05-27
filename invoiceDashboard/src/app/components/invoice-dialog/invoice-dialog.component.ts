@@ -30,14 +30,14 @@ export class InvoiceDialogComponent implements OnInit {
   bankInformation: BankInformation[];
   bankInformation$: Observable<BankInformation[]>;
 
-  
+
   constructor(
     public dialogRef: MatDialogRef<InvoiceDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: number,
     private bankService: BankService,
     private appStateService: AppstateService
-  ) {}
-  
+  ) { }
+
   ngOnInit() {
     this.getBankInformation();
     this.bankPaymentCheck = false;
@@ -50,11 +50,11 @@ export class InvoiceDialogComponent implements OnInit {
 
   initInvoice() {
     this.invoice = {
-      iban:'',
-      amount:0,
-      date:'',
-      title:'',
-      id:-1
+      iban: '',
+      amount: 0,
+      date: '',
+      title: '',
+      id: -1
     }
   }
 
@@ -80,16 +80,16 @@ export class InvoiceDialogComponent implements OnInit {
     this.selectedTab = 1;
     this.bankPaymentCheck = true;
   }
- 
+
   addNewPayment() {
     if (this.data === -1) {
-     
+
       this.appStateService.addItem(this.invoice);
     } else {
-     
+
       this.appStateService.editItem(this.invoice);
     }
-    
+
     this.dialogRef.close();
   }
 
@@ -103,13 +103,13 @@ export class InvoiceDialogComponent implements OnInit {
   informationSelected(value) {
     this.bankInfo = value;
   }
- 
+
   addNewPaymentThroughBank() {
     if (this.data === -1) {
-     
+
       this.appStateService.addItem(this.invoice);
     }
-     else {
+    else {
       this.invoice.amount = this.bankInfo.amount;
       this.invoice.iban = this.bankInfo.iban;
       this.appStateService.editItem(this.invoice);
