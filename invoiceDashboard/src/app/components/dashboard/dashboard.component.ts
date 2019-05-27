@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   constructor(public dialog: MatDialog, private appStateService: AppstateService) { }
 
   ngOnInit() {
-    this.appStateService.getStore().subscribe(data => {
+    this.appStateService.getStore().subscribe((data: Observable<Invoice[]>) => {
       this.dataSource = data;
       this.invoices = data;
     });

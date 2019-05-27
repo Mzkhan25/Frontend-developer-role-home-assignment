@@ -71,18 +71,13 @@ export class InvoiceDialogComponent implements OnInit {
 
   // Helper Functions
 
-  onNoClick(): void {
-
-    this.dialogRef.close();
-  }
-
   changeTab() {
 
     this.selectedTab = 1;
     this.bankPaymentCheck = true;
   }
 
-  informationSelected(value) {
+  informationSelected(value: BankInformation) {
 
     this.bankInfo = value;
   }
