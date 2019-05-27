@@ -9,6 +9,7 @@ export class BankSearchPipe implements PipeTransform {
     if (!items) {
       return [];
     }
+    
     if (!field || !value) {
       return items;
     }
@@ -17,5 +18,4 @@ export class BankSearchPipe implements PipeTransform {
       singleItem[field].toLowerCase().includes(value.toLowerCase())
     );
   }
-
 }

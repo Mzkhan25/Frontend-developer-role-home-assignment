@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { Invoice } from 'src/app/models/invoice';
 import { AppstateService } from 'src/app/services/appstate.service';
@@ -11,18 +11,19 @@ import { InvoiceDialogComponent } from '../invoice-dialog/invoice-dialog.compone
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   // Variables 
   invoices: Observable<Invoice[]>;
   displayedColumns: string[] = ['date', 'title', 'amount', 'iban', 'changes'];
   dataSource: any;
   invoice: Invoice;
+  appStateSubscription: Subscription;
 
   constructor(public dialog: MatDialog, private appStateService: AppstateService) { }
 
   ngOnInit() {
-    this.appStateService.getStore().subscribe((data: Observable<Invoice[]>) => {
+    this.appStateSubscription = this.appStateService.getStore().subscribe((data: Observable<Invoice[]>) => {
       this.dataSource = data;
       this.invoices = data;
     });
@@ -52,5 +53,10 @@ export class DashboardComponent implements OnInit {
   // Delete method
   deleteInvoice(id: number) {
     this.appStateService.deleteItem(id);
+  }
+ 
+  //Subscription CleanUp
+  ngOnDestroy(): void {
+    this.appStateSubscription.unsubscribe();
   }
 }

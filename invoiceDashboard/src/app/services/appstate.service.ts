@@ -17,16 +17,15 @@ export class AppstateService {
     return this.store.select('invoice');
   }
 
- addItem(invoice: Invoice): any {
-  return this.store.dispatch(new InvoiceActions.AddInvoice(invoice));
- }
+  addItem(invoice: Invoice): any {
+    return this.store.dispatch(new InvoiceActions.AddInvoice(invoice));
+  }
 
- editItem(invoice: Invoice): any {
-  return this.store.dispatch(new InvoiceActions.EditInvoice(invoice));
- }
+  editItem(invoice: Invoice): any {
+    return this.store.dispatch(new InvoiceActions.EditInvoice(invoice));
+  }
 
- deleteItem(id: number): any {
-  return this.store.dispatch(new InvoiceActions.RemoveInvoice(id));
- }
-
+  deleteItem(id: number): any {
+    return this.store.dispatch(new InvoiceActions.RemoveInvoice(id));
+  }
 }

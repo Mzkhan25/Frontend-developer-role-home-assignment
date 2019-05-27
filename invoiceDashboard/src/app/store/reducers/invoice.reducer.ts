@@ -1,8 +1,5 @@
-import { Action } from '@ngrx/store';
 import { Invoice } from '../../models/invoice';
 import * as InvoiceActions from './../actions/invoice.actions';
-
-
 
 const initialState: Invoice = {
     id: 1,
@@ -23,9 +20,9 @@ export function reducer(state: Invoice[] = [initialState], action: InvoiceAction
             const removeFilter = state.filter(data => data.id !== action.id);
             return removeFilter;
         case InvoiceActions.EDIT_INVOICE:
-             let editFilter = state.find(data => data.id === action.payload.id);
-             editFilter = action.payload;
-             return [...state ];
+            let editFilter = state.find(data => data.id === action.payload.id);
+            editFilter = action.payload;
+            return [...state];
         default:
             console.log(state);
             return state;

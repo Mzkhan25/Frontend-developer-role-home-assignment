@@ -28,7 +28,7 @@
         </div>
         <div class="row mat-fields-padding">
           <button mat-raised-button color="primary" [disabled]="(bankPaymentCheck) 
-          ||  (invoice.title.length < 1 || invoice.amount < 1 )" (click)="addNewPaymentDesktop()">Done</button>
+          ||  (invoice.title.length < 1 || invoice.amount < 1 )" (click)="addNewPayment()">Done</button>
         </div>
 
       </mat-tab>
@@ -69,7 +69,7 @@
         <div>
           <button mat-raised-button color="primary"
             [disabled]="  (this.bankInfo.amount<1) || (invoice.title.length < 1) "
-            (click)="addNewPaymentThroughBankDesktop()">Done</button>
+            (click)="addNewPaymentThroughBank()">Done</button>
         </div>
       </mat-tab>
     </mat-tab-group>
@@ -127,7 +127,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <button mat-raised-button color="primary" [disabled]="(bankPaymentCheck) 
-          ||  (invoice.title.length < 1 || invoice.amount < 1 )" (click)="addNewPaymentDesktop()">Done</button>
+          ||  (invoice.title.length < 1 || invoice.amount < 1 )" (click)="addNewPayment()">Done</button>
       </mat-expansion-panel>
     </mat-accordion>
 

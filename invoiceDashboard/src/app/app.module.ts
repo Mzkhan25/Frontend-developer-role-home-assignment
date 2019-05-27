@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule  } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -8,11 +8,11 @@ import { StoreModule } from '@ngrx/store';
 
 import { reducer } from './store/reducers/invoice.reducer';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
-    MatButtonModule,
+  MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
   MatDatepickerModule,
@@ -57,7 +57,6 @@ import { BankSearchPipe } from './pipes/bank-search.pipe';
     MatGridListModule,
     MatInputModule,
     MatRadioModule,
-    MatRippleModule,
     MatSliderModule,
     MatSlideToggleModule,
     MatTableModule,

@@ -57,9 +57,9 @@
 
 
 <ng-container>
-  <div class="d-block d-lg-none">
+  <div class="d-block d-lg-none px-3">
     <div *ngFor="let invoice of invoices">
-      <mat-card class="dashboard-card">
+      <mat-card class="dashboard-card mt-3">
         <mat-card-header>
           <mat-card-title>{{invoice.title}}</mat-card-title>
           <mat-card-subtitle>{{invoice.date  | date: "medium"}}</mat-card-subtitle>

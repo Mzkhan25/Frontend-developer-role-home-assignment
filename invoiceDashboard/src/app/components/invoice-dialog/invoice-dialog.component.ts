@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { AppstateService } from 'src/app/services/appstate.service';
 import { Invoice } from 'src/app/models/invoice';
@@ -16,8 +16,8 @@ import { BankInformation } from 'src/app/models/bank-information';
   templateUrl: './invoice-dialog.component.html',
   styleUrls: ['./invoice-dialog.component.css']
 })
-export class InvoiceDialogComponent implements OnInit {
-
+export class InvoiceDialogComponent implements OnInit, OnDestroy {
+  
   // Variables
   selectedTab = 0;
   invoiceId: number;
@@ -32,6 +32,9 @@ export class InvoiceDialogComponent implements OnInit {
   mobileBankTransaction: boolean;
   bankPaymentCheck: boolean;
   bankRecordChecked: boolean;
+
+  bankSubscription: Subscription;
+  invoiceSubscription: Subscription;
 
   constructor(
     public dialogRef: MatDialogRef<InvoiceDialogComponent>,
@@ -51,15 +54,15 @@ export class InvoiceDialogComponent implements OnInit {
     }
     this.initBooleanChecks();
   }
-  initBooleanChecks() {
 
+  //Initializing Modules
+  initBooleanChecks() {
     this.bankPaymentCheck = false;
     this.mobileBankTransaction = false;
     this.bankRecordChecked = false;
   }
 
   initInvoice() {
-
     this.invoice = {
       iban: '',
       amount: 0,
@@ -67,16 +70,9 @@ export class InvoiceDialogComponent implements OnInit {
       title: '',
       id: -1
     };
-
-    this.bankInfo = {
-      iban: '',
-      amount: 0,
-      id: -1
-    };
   }
 
   initBank() {
-
     this.bankInfo = {
       iban: '',
       amount: 0,
@@ -87,35 +83,30 @@ export class InvoiceDialogComponent implements OnInit {
   // Helper Functions
 
   changeTab() {
-
     this.selectedTab = 1;
     this.bankPaymentCheck = true;
   }
 
   informationSelected(value: BankInformation) {
-
     this.bankInfo = value;
     this.bankRecordChecked = false;
   }
 
   useBankTransactions() {
-
     this.mobileBankTransaction = !this.mobileBankTransaction;
   }
 
   // Get Functions
 
   getBankInformation() {
-
-    this.bankService.getBankData().subscribe(data => {
+    this.bankSubscription = this.bankService.getBankData().subscribe(data => {
       this.bankInformation = data;
     });
   }
 
   getRentRecord() {
-
     this.invoices = this.appStateService.getStore();
-    this.invoices.subscribe(data => {
+    this.invoiceSubscription = this.invoices.subscribe(data => {
       this.invoice = data.find(rent => rent.id === this.data);
       if (this.invoice.iban) {
         this.bankPaymentCheck = true;
@@ -127,8 +118,7 @@ export class InvoiceDialogComponent implements OnInit {
 
   // Save Methods
 
-  addNewPaymentDesktop() {
-
+  addNewPayment() {
     if (this.data === -1) {
       this.appStateService.addItem(this.invoice);
     } else {
@@ -138,7 +128,7 @@ export class InvoiceDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  addNewPaymentThroughBankDesktop() {
+  addNewPaymentThroughBank() {
     this.invoice.amount = this.bankInfo.amount;
     this.invoice.iban = this.bankInfo.iban;
 
@@ -149,5 +139,11 @@ export class InvoiceDialogComponent implements OnInit {
     }
 
     this.dialogRef.close();
+  }
+
+  //Subscription CleanUp
+  ngOnDestroy(): void {
+    this.bankSubscription.unsubscribe();
+    this.invoiceSubscription.unsubscribe();
   }
 }
