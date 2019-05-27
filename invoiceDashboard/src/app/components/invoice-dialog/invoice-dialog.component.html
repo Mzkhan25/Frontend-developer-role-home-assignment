@@ -28,19 +28,20 @@
         </div>
         <div class="row mat-fields-padding">
           <button mat-raised-button color="primary" [disabled]="(bankPaymentCheck) 
-          ||  (invoice.title.length < 1 || invoice.amount < 1 )" 
-          (click)="addNewPaymentDesktop()">Done</button>
+          ||  (invoice.title.length < 1 || invoice.amount < 1 )" (click)="addNewPaymentDesktop()">Done</button>
         </div>
 
       </mat-tab>
       <mat-tab label="Payments">
         <form>
           <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-addon">
-                <i class="glyphicon glyphicon-search"></i>
+            <div class="input-group mb-6">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+
+                </div>
               </div>
-              <input type="text" class="example-full-width" name="searchString" placeholder="Search Iban"
+              <input type="text" class="search-width" name="searchString" placeholder="Search Iban"
                 [(ngModel)]="searchString" />
             </div>
           </div>
@@ -66,7 +67,8 @@
           </div>
         </div>
         <div>
-          <button mat-raised-button color="primary" [disabled]="  (this.bankInfo.amount<1) || (invoice.title.length < 1) "
+          <button mat-raised-button color="primary"
+            [disabled]="  (this.bankInfo.amount<1) || (invoice.title.length < 1) "
             (click)="addNewPaymentThroughBankDesktop()">Done</button>
         </div>
       </mat-tab>
@@ -82,7 +84,7 @@
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Date 
+            Date
           </mat-panel-title>
         </mat-expansion-panel-header>
 
@@ -105,7 +107,7 @@
           <input matInput placeholder="Subject" [(ngModel)]="invoice.title">
         </mat-form-field>
       </mat-expansion-panel>
-     
+
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -113,25 +115,22 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <mat-form-field >
-          <input matInput placeholder="Amount" type="number" [(ngModel)]="invoice.amount"
-            class="example-right-align">
+        <mat-form-field>
+          <input matInput placeholder="Amount" type="number" [(ngModel)]="invoice.amount" class="example-right-align">
           <span matSuffix> Euro</span>
-        </mat-form-field>       
+        </mat-form-field>
       </mat-expansion-panel>
       <mat-expansion-panel>
-          <mat-expansion-panel-header>
-              <mat-panel-title>
-                Save :
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-          <button mat-raised-button color="primary" [disabled]="(bankPaymentCheck) 
-          ||  (invoice.title.length < 1 || invoice.amount < 1 )" 
-          (click)="addNewPaymentDesktop()">Done</button>
-        </mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Save :
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <button mat-raised-button color="primary" [disabled]="(bankPaymentCheck) 
+          ||  (invoice.title.length < 1 || invoice.amount < 1 )" (click)="addNewPaymentDesktop()">Done</button>
+      </mat-expansion-panel>
     </mat-accordion>
 
   </div>
 
 </ng-container>
-
