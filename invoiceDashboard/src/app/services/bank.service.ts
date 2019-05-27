@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { BankInformation } from '../models/bank-information';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class BankService {
 
   constructor(private httpClient: HttpClient) {  }
 
-  getBankData(): Observable<any[]> {
-    return this.httpClient.get<any[]>(this.itemUrl);
+  getBankData(): Observable<BankInformation[]> {
+    return this.httpClient.get<BankInformation[]>(this.itemUrl);
   }
 }

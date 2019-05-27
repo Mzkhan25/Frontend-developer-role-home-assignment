@@ -18,7 +18,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['date', 'title', 'amount', 'iban', 'changes'];
   dataSource: any;
   invoice: Invoice;
+
   appStateSubscription: Subscription;
+  dialogSubscription: Subscription;
 
   constructor(public dialog: MatDialog, private appStateService: AppstateService) { }
 
@@ -37,7 +39,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       data: id
     });
 
-    dialogRef.afterClosed().subscribe(() => {});
+   this.dialogSubscription = dialogRef.afterClosed().subscribe();
   }
 
   addNewInvoice(): void {
@@ -47,7 +49,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       data: -1
     });
 
-    dialogRef.afterClosed().subscribe(() => {});
+    this.dialogSubscription = dialogRef.afterClosed().subscribe();
   }
 
   // Delete method
@@ -58,5 +60,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   //Subscription CleanUp
   ngOnDestroy(): void {
     this.appStateSubscription.unsubscribe();
+    this.dialogSubscription.unsubscribe();
   }
 }
