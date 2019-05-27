@@ -14,6 +14,7 @@ export class RemoveInvoice implements Action {
     readonly type = REMOVE_INVOICE;
     constructor(public id: number) { }
 }
+
 export class EditInvoice implements Action {
     readonly type = EDIT_INVOICE;
     constructor(public payload: Invoice) { }

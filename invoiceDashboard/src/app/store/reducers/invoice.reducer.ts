@@ -17,14 +17,13 @@ export function reducer(state: Invoice[] = [initialState], action: InvoiceAction
             action.payload.id = length + 1;
             return [...state, action.payload];
         case InvoiceActions.REMOVE_INVOICE:
-            const removeFilter = state.filter(data => data.id !== action.id);
-            return removeFilter;
+            const filteredState = state.filter(data => data.id !== action.id);
+            return filteredState;
         case InvoiceActions.EDIT_INVOICE:
-            let editFilter = state.find(data => data.id === action.payload.id);
-            editFilter = action.payload;
+            let editedState = state.find(data => data.id === action.payload.id);
+            editedState = action.payload;
             return [...state];
         default:
-            console.log(state);
             return state;
     }
 }
