@@ -43,10 +43,11 @@ export class InvoiceDialogComponent implements OnInit {
   ngOnInit() {
 
     this.getBankInformation();
+    this.initBank();
     if (this.data !== null && this.data !== undefined && this.data !== -1) {
       this.getRentRecord();
     } else {
-      this.initInterfaces();
+      this.initInvoice();
     }
     this.initBooleanChecks();
   }
@@ -57,7 +58,7 @@ export class InvoiceDialogComponent implements OnInit {
     this.bankRecordChecked = false;
   }
 
-  initInterfaces() {
+  initInvoice() {
 
     this.invoice = {
       iban: '',
@@ -66,6 +67,15 @@ export class InvoiceDialogComponent implements OnInit {
       title: '',
       id: -1
     };
+
+    this.bankInfo = {
+      iban: '',
+      amount: 0,
+      id: -1
+    };
+  }
+
+  initBank() {
 
     this.bankInfo = {
       iban: '',
@@ -110,6 +120,8 @@ export class InvoiceDialogComponent implements OnInit {
       if (this.invoice.iban) {
         this.bankPaymentCheck = true;
       }
+
+      this.bankInfo.amount = this.invoice.amount;
     });
   }
 
