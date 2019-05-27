@@ -31,6 +31,7 @@ export class InvoiceDialogComponent implements OnInit {
 
   mobileBankTransaction: boolean;
   bankPaymentCheck: boolean;
+  bankRecordChecked: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<InvoiceDialogComponent>,
@@ -42,14 +43,18 @@ export class InvoiceDialogComponent implements OnInit {
   ngOnInit() {
 
     this.getBankInformation();
-    this.bankPaymentCheck = false;
-    this.mobileBankTransaction = false;
-
     if (this.data !== null && this.data !== undefined && this.data !== -1) {
       this.getRentRecord();
     } else {
       this.initInterfaces();
     }
+    this.initBooleanChecks();
+  }
+  initBooleanChecks() {
+
+    this.bankPaymentCheck = false;
+    this.mobileBankTransaction = false;
+    this.bankRecordChecked = false;
   }
 
   initInterfaces() {
@@ -64,7 +69,7 @@ export class InvoiceDialogComponent implements OnInit {
 
     this.bankInfo = {
       iban: '',
-      amount: -1,
+      amount: 0,
       id: -1
     };
   }
@@ -80,11 +85,12 @@ export class InvoiceDialogComponent implements OnInit {
   informationSelected(value: BankInformation) {
 
     this.bankInfo = value;
+    this.bankRecordChecked = false;
   }
 
   useBankTransactions() {
 
-    this.mobileBankTransaction = ! this.mobileBankTransaction;
+    this.mobileBankTransaction = !this.mobileBankTransaction;
   }
 
   // Get Functions
@@ -101,7 +107,6 @@ export class InvoiceDialogComponent implements OnInit {
     this.invoices = this.appStateService.getStore();
     this.invoices.subscribe(data => {
       this.invoice = data.find(rent => rent.id === this.data);
-
       if (this.invoice.iban) {
         this.bankPaymentCheck = true;
       }
