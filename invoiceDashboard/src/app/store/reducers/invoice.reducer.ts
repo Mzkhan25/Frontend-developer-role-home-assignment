@@ -12,10 +12,8 @@ const initialState: Invoice = {
     iban: ''
 };
 
-// Section 2
 export function reducer(state: Invoice[] = [initialState], action: InvoiceActions.Actions) {
 
-    // Section 3
     switch (action.type) {
         case InvoiceActions.ADD_INVOICE:
             length = state.length;
