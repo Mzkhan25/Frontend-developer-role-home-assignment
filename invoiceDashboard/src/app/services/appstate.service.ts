@@ -13,19 +13,19 @@ export class AppstateService {
 
   constructor(private store: Store<AppState>) { }
 
-  getStore(): any {
+  getStore() {
     return this.store.select('invoice');
   }
 
-  addItem(invoice: Invoice): any {
+  addItem(invoice: Invoice) {
     return this.store.dispatch(new InvoiceActions.AddInvoice(invoice));
   }
 
-  editItem(invoice: Invoice): any {
+  editItem(invoice: Invoice) {
     return this.store.dispatch(new InvoiceActions.EditInvoice(invoice));
   }
 
-  deleteItem(id: number): any {
+  deleteItem(id: number) {
     return this.store.dispatch(new InvoiceActions.RemoveInvoice(id));
   }
 }
