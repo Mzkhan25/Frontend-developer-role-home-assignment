@@ -2,7 +2,7 @@
   <div class="d-lg-block d-none">
     <mat-tab-group [selectedIndex]="selectedTab">
       <mat-tab label="Invoice Information">
-        <div class="row">
+        <div class="row mat-fields-padding">
 
           <mat-form-field>
             <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="invoice.date">
@@ -10,23 +10,23 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
-        <div class="row">
+        <div class="row mat-fields-padding">
           <mat-form-field>
             <input matInput placeholder="Subject" [(ngModel)]="invoice.title">
           </mat-form-field>
         </div>
-        <div class="row">
+        <div class="row mat-fields-padding">
           Retrieve amount from bank account <mat-slide-toggle placeholder="Amount" (click)="changeTab()">
           </mat-slide-toggle>
         </div>
-        <div class="row">
+        <div class="row mat-fields-padding">
           <mat-form-field>
             <input [disabled]="bankPaymentCheck" matInput placeholder="Amount" type="number"
               [(ngModel)]="invoice.amount" class="example-right-align">
             <span matSuffix> Euro</span>
           </mat-form-field>
         </div>
-        <div>
+        <div class="row mat-fields-padding">
           <button mat-raised-button color="primary" [disabled]="(bankPaymentCheck) 
           ||  (invoice.title.length < 1 || invoice.amount < 1 )" 
           (click)="addNewPaymentDesktop()">Done</button>

@@ -2,6 +2,6 @@
   width: 100%;
 }
 
-.example-card {
-  max-width: 400px;
+.mat-fields-padding{
+  padding-left: 15px;
 }
