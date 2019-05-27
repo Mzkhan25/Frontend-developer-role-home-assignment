@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatGridListModule, MatTableModule, MatDialogModule } from '@angular/material';
+import { MatGridListModule, MatTableModule, MatDialogModule, MatCardModule } from '@angular/material';
 
 import { DashboardComponent } from './dashboard.component';
 import { AppstateService } from 'src/app/services/appstate.service';
@@ -12,7 +12,7 @@ describe('DashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DashboardComponent],
-      imports: [MatGridListModule, MatTableModule, MatDialogModule, StoreModule.forRoot({})],
+      imports: [MatGridListModule, MatTableModule, MatDialogModule, MatCardModule, StoreModule.forRoot({})],
       providers: [AppstateService]
     })
       .compileComponents();

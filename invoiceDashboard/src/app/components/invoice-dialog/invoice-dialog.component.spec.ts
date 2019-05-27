@@ -1,21 +1,9 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {
-  InvoiceDialogComponent
-} from './invoice-dialog.component';
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
-import {
-  BankSearchPipe
-} from './../../pipes/bank-search.pipe';
-import {
-  MatDatepickerModule,
+import {InvoiceDialogComponent } from './invoice-dialog.component';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {BankSearchPipe } from './../../pipes/bank-search.pipe';
+import {MatDatepickerModule,
   MatDialogModule,
   MatGridListModule,
   MatInputModule,
@@ -25,10 +13,11 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatNativeDateModule,
-  
+  MatExpansionModule
 } from '@angular/material';
-import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { HttpClientTestingModule} from '@angular/common/http/testing';
 import { StoreModule } from '@ngrx/store';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('InvoiceDialogComponent', () => {
   let component: InvoiceDialogComponent;
@@ -49,6 +38,8 @@ describe('InvoiceDialogComponent', () => {
           MatRadioModule,
           HttpClientTestingModule,
           MatNativeDateModule,
+          MatExpansionModule,
+          BrowserAnimationsModule,
           StoreModule.forRoot({})
 
         ],
