@@ -13,6 +13,7 @@ import { InvoiceDialogComponent } from '../invoice-dialog/invoice-dialog.compone
 })
 export class DashboardComponent implements OnInit {
 
+  // Variables 
   invoices: Observable<Invoice[]>;
   displayedColumns: string[] = ['date', 'title', 'amount', 'iban', 'changes'];
   dataSource: any;
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  // Dialog modules
   editInvoice(id: number): void {
     const dialogRef = this.dialog.open(InvoiceDialogComponent, {
       width: '50%',
@@ -47,6 +49,7 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {});
   }
 
+  // Delete method
   deleteInvoice(id: number) {
     this.appStateService.deleteItem(id);
   }

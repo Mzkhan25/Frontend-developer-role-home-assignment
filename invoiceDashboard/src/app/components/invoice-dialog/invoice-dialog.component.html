@@ -3,7 +3,7 @@
     <mat-tab-group [selectedIndex]="selectedTab">
       <mat-tab label="Invoice Information">
         <div class="row">
-    
+
           <mat-form-field>
             <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="invoice.date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -16,20 +16,22 @@
           </mat-form-field>
         </div>
         <div class="row">
-          Retrieve amount from bank account <mat-slide-toggle placeholder="Amount" (click)="changeTab()"></mat-slide-toggle>
+          Retrieve amount from bank account <mat-slide-toggle placeholder="Amount" (click)="changeTab()">
+          </mat-slide-toggle>
         </div>
         <div class="row">
           <mat-form-field>
-            <input [disabled]="bankPaymentCheck" matInput placeholder="Amount" type="number" [(ngModel)]="invoice.amount"
-              class="example-right-align">
+            <input [disabled]="bankPaymentCheck" matInput placeholder="Amount" type="number"
+              [(ngModel)]="invoice.amount" class="example-right-align">
             <span matSuffix> Euro</span>
           </mat-form-field>
         </div>
         <div>
-          <button mat-raised-button color="primary" [disabled]="bankPaymentCheck"
-            (click)="addNewPayment()">Done</button>
+          <button mat-raised-button color="primary" [disabled]="(bankPaymentCheck) 
+          ||  (invoice.title.length < 1 || invoice.amount < 1 )" 
+          (click)="addNewPaymentDesktop()">Done</button>
         </div>
-    
+
       </mat-tab>
       <mat-tab label="Payments">
         <form>
@@ -45,13 +47,14 @@
         </form>
         <div>
           Bank Transfers:
-          <div class="divs" *ngFor="let information of bankInformation | bankSearch : 'iban' : searchString; let i = index"
-            (click)="informationSelected(information)">
+          <div class="divs"
+            *ngFor="let information of bankInformation | bankSearch : 'iban' : searchString; let i = index">
             <mat-grid-list cols="3" rowHeight="50px">
-    
+
               <mat-grid-tile [colspan]="1">
-    
-                <mat-radio-button value="information.selected"></mat-radio-button>
+
+                <mat-radio-button (click)="informationSelected(information)" value="information.selected">
+                </mat-radio-button>
               </mat-grid-tile>
               <mat-grid-tile [colspan]="1">
                 {{information.iban}}
@@ -63,18 +66,71 @@
           </div>
         </div>
         <div>
-          <button mat-raised-button color="primary" (click)="addNewPaymentThroughBank()">Done</button>
+          <button mat-raised-button color="primary" [disabled]="(bankInfo.amount==-1)  ||  (invoice.title.length < 1) "
+            (click)="addNewPaymentThroughBankDesktop()">Done</button>
         </div>
       </mat-tab>
     </mat-tab-group>
-    
+
   </div>
 </ng-container>
 
 
 <ng-container>
   <div class="d-block d-lg-none">
-asd
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Date 
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field style="max-width: 75%">
+          <input matInput [matDatepicker]="accordianPicker" placeholder="Choose a date" [(ngModel)]="invoice.date">
+          <mat-datepicker-toggle matSuffix [for]="accordianPicker"></mat-datepicker-toggle>
+          <mat-datepicker #accordianPicker></mat-datepicker>
+        </mat-form-field>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Subject
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <input matInput placeholder="Subject" [(ngModel)]="invoice.title">
+        </mat-form-field>
+      </mat-expansion-panel>
+     
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Amount
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field >
+          <input matInput placeholder="Amount" type="number" [(ngModel)]="invoice.amount"
+            class="example-right-align">
+          <span matSuffix> Euro</span>
+        </mat-form-field>       
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                Save :
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          <button mat-raised-button color="primary" [disabled]="(bankPaymentCheck) 
+          ||  (invoice.title.length < 1 || invoice.amount < 1 )" 
+          (click)="addNewPaymentDesktop()">Done</button>
+        </mat-expansion-panel>
+    </mat-accordion>
+
   </div>
 
 </ng-container>
