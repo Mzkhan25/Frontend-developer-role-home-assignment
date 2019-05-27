@@ -22,6 +22,7 @@ export class InvoiceDialogComponent implements OnInit, OnDestroy {
   selectedTab = 0;
   invoiceId: number;
   invoice: Invoice;
+  searchString: string;
 
   bankInfo: BankInformation;
   bankInformation: BankInformation[];
